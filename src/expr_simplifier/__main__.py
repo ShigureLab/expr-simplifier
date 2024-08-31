@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 
-from moelib import __version__
+from expr_simplifier import __version__
 
 
 def main() -> None:

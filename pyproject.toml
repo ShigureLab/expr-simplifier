@@ -1,5 +1,5 @@
 [project]
-name = "moelib"
+name = "expr-simplifier"
 version = "0.1.0"
 description = ""
 readme = "README.md"
@@ -22,13 +22,13 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ShigureLab/moelib"
-Documentation = "https://github.com/ShigureLab/moelib"
-Repository = "https://github.com/ShigureLab/moelib"
-Issues = "https://github.com/ShigureLab/moelib/issues"
+Homepage = "https://github.com/ShigureLab/expr-simplifier"
+Documentation = "https://github.com/ShigureLab/expr-simplifier"
+Repository = "https://github.com/ShigureLab/expr-simplifier"
+Issues = "https://github.com/ShigureLab/expr-simplifier/issues"
 
 [project.scripts]
-moelib = "moelib.__main__:main"
+expr_simplifier = "expr_simplifier.__main__:main"
 
 [tool.uv]
 dev-dependencies = [
@@ -40,7 +40,7 @@ dev-dependencies = [
 ]
 
 [tool.pyright]
-include = ["src/moelib", "tests"]
+include = ["src/expr_simplifier", "tests"]
 pythonVersion = "3.9"
 typeCheckingMode = "strict"
 
@@ -74,7 +74,7 @@ ignore = [
 
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
-known-first-party = ["moelib"]
+known-first-party = ["expr_simplifier"]
 
 [tool.ruff.lint.per-file-ignores]
 "setup.py" = ["I"]
