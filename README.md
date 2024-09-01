@@ -12,3 +12,18 @@
    <a href="https://github.com/astral-sh/ruff"><img alt="ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=flat-square"></a>
    <a href="https://gitmoji.dev"><img alt="Gitmoji" src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67?style=flat-square"></a>
 </p>
+
+## Installation
+
+TODO...
+
+## Usage
+
+```console
+$ expr_simplifier cse "a * 4 + (a * 4)"
+(___t_0 := (a * 4)) + ___t_0
+$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
+(___x := 2) + ___x
+$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
+4
+```
