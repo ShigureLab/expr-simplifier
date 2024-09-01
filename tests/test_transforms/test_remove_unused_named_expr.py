@@ -10,7 +10,7 @@ from expr_simplifier.transforms import apply_remove_unused_named_expr
 @pytest.mark.parametrize(
     ["expr", "expected"],
     [
-        ("(___x := a.b) + ___x", "a.b + ___x"),
+        ("(___x := a.b) + ___x", "(___x := a.b) + ___x"),
         ("(___y := (___x := a.b)) + ___y", "(___y := a.b) + ___y"),
         ("(___y := (___x := a.b))", "a.b"),
     ],

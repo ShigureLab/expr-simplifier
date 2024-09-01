@@ -20,11 +20,12 @@ class RemoveUnusedNamedExpr(ast.NodeTransformer):
         self.used_symbols = used_symbols
 
     def visit_NamedExpr(self, node: ast.NamedExpr) -> ast.expr:
-        value = self.visit(node.value)
+        transformed_node = self.generic_visit(node)
+        assert isinstance(transformed_node, ast.NamedExpr)
         name = node.target.id
         if name not in self.used_symbols:
-            return value
-        return node
+            return transformed_node.value
+        return transformed_node
 
 
 def apply_remove_unused_named_expr(expr: ast.AST) -> ast.AST:

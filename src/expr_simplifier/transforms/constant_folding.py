@@ -15,7 +15,7 @@ def fold_to_constant(node: ast.AST) -> ast.Constant:
 
 class ConstantFolding(ast.NodeTransformer):
     def visit(self, node: ast.AST) -> ast.AST:
-        transformed_node = super().visit(node)
+        transformed_node = self.generic_visit(node)
         if isinstance(node, ast.BinOp) and isinstance(node.left, ast.Constant) and isinstance(node.right, ast.Constant):
             return fold_to_constant(node)
         if isinstance(node, ast.UnaryOp) and isinstance(node.operand, ast.Constant):

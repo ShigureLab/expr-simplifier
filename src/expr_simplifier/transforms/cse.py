@@ -18,7 +18,7 @@ class CSEPreAnalyzer(ast.NodeVisitor):
         super().__init__()
 
     def visit(self, node: ast.AST) -> None:
-        super().visit(node)
+        self.generic_visit(node)
         expr_string = ast.unparse(node)
         if isinstance(node, ast.expr):
             if isinstance(node, ast.Name):
@@ -38,10 +38,10 @@ class CommonSubexpressionElimination(ast.NodeTransformer):
         self.declared_symbols = set[str]()
         super().__init__()
 
-    def visit(self, node: ast.AST) -> ast.expr:
+    def visit(self, node: ast.AST) -> ast.AST:
         expr_string = ast.unparse(node)
-        transformed_node = super().visit(node)
-        if isinstance(node, ast.expr) and expr_string in self.subexpressions:
+        transformed_node = self.generic_visit(node)
+        if isinstance(transformed_node, ast.expr) and expr_string in self.subexpressions:
             symbol, count = self.subexpressions[expr_string]
             if count > 1:
                 if symbol not in self.declared_symbols:
