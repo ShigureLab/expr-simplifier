@@ -4,7 +4,7 @@ import ast
 import copy
 
 
-class RemoveNamedExpr(ast.NodeTransformer):
+class InlineNamedExpr(ast.NodeTransformer):
     def __init__(self, constant_only: bool = False) -> None:
         super().__init__()
         self.named_expressions = dict[str, ast.expr]()
@@ -29,6 +29,6 @@ class RemoveNamedExpr(ast.NodeTransformer):
         return node
 
 
-def apply_remove_named_expr(expr: ast.AST, constant_only: bool = False) -> ast.AST:
-    remove_named_expr = RemoveNamedExpr(constant_only)
-    return remove_named_expr.visit(expr)
+def apply_inline_named_expr(expr: ast.AST, constant_only: bool = False) -> ast.AST:
+    inline_named_expr = InlineNamedExpr(constant_only)
+    return inline_named_expr.visit(expr)

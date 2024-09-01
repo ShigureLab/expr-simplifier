@@ -5,7 +5,7 @@ import ast
 from typing_extensions import TypeAlias
 
 from expr_simplifier.symbol_table import SymbolTable
-from expr_simplifier.transforms.remove_named_expr import apply_remove_named_expr
+from expr_simplifier.transforms.inline_named_expr import apply_inline_named_expr
 
 SubExpressionTable: TypeAlias = dict[str, tuple[str, int]]
 
@@ -57,7 +57,7 @@ def show_subexpressions(subexpressions: SubExpressionTable) -> None:
 
 
 def apply_cse(expr: ast.AST) -> ast.AST:
-    expr = apply_remove_named_expr(expr)
+    expr = apply_inline_named_expr(expr)
     cse_pre_analyzer = CSEPreAnalyzer()
     cse_pre_analyzer.visit(expr)
     cse = CommonSubexpressionElimination(cse_pre_analyzer.subexpressions)

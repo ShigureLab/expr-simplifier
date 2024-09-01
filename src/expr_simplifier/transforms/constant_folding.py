@@ -4,7 +4,7 @@ import ast
 
 from typing_extensions import TypeAlias
 
-from expr_simplifier.transforms.remove_named_expr import apply_remove_named_expr
+from expr_simplifier.transforms.inline_named_expr import apply_inline_named_expr
 
 SubExpressionTable: TypeAlias = dict[str, tuple[str, int]]
 
@@ -35,7 +35,7 @@ class ConstantFolding(ast.NodeTransformer):
 
 def apply_constant_folding(expr: ast.AST) -> ast.AST:
     # Constant propagation
-    expr = apply_remove_named_expr(expr, constant_only=True)
+    expr = apply_inline_named_expr(expr, constant_only=True)
     # Constant folding
     expr = ConstantFolding().visit(expr)
     return expr
