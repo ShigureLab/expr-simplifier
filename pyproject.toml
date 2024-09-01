@@ -4,9 +4,7 @@ version = "0.1.0"
 description = ""
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = [
-    "typing-extensions>=4.12.2",
-]
+dependencies = ["typing-extensions>=4.12.2"]
 authors = [{ name = "Nyakku Shigure", email = "sigure.qaq@gmail.com" }]
 keywords = []
 license = { text = "MIT" }
@@ -77,6 +75,7 @@ ignore = [
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
 known-first-party = ["expr_simplifier"]
+combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
 "setup.py" = ["I"]

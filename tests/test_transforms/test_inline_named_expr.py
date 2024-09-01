@@ -4,7 +4,10 @@ import ast
 
 import pytest
 
-from expr_simplifier.transforms import apply_inline_named_expr
+from expr_simplifier.transforms import (
+    apply_constant_propagation,
+    apply_inline_all_named_expr,
+)
 
 
 @pytest.mark.parametrize(
@@ -19,7 +22,7 @@ from expr_simplifier.transforms import apply_inline_named_expr
 )
 def test_inline_named_expr(expr: str, expected: str):
     tree = ast.parse(expr, mode="eval")
-    transformed_tree = apply_inline_named_expr(tree)
+    transformed_tree = apply_inline_all_named_expr(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
 
@@ -37,6 +40,6 @@ def test_inline_named_expr(expr: str, expected: str):
 )
 def test_constant_propagation(expr: str, expected: str):
     tree = ast.parse(expr, mode="eval")
-    transformed_tree = apply_inline_named_expr(tree, constant_only=True)
+    transformed_tree = apply_constant_propagation(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected

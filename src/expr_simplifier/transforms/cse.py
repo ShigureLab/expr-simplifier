@@ -5,7 +5,8 @@ import ast
 from typing_extensions import TypeAlias
 
 from expr_simplifier.symbol_table import SymbolTable
-from expr_simplifier.transforms.inline_named_expr import apply_inline_named_expr
+from expr_simplifier.transforms.inline_named_expr import apply_inline_all_named_expr
+from expr_simplifier.transforms.remove_unused_named_expr import apply_remove_unused_named_expr
 
 SubExpressionTable: TypeAlias = dict[str, tuple[str, int]]
 
@@ -45,9 +46,9 @@ class CommonSubexpressionElimination(ast.NodeTransformer):
             if count > 1:
                 if symbol not in self.declared_symbols:
                     self.declared_symbols.add(symbol)
-                    assign_node = ast.NamedExpr(target=ast.Name(id=symbol), value=transformed_node)
+                    assign_node = ast.NamedExpr(target=ast.Name(id=symbol, ctx=ast.Store()), value=transformed_node)
                     return assign_node
-                return ast.Name(id=symbol)
+                return ast.Name(id=symbol, ctx=ast.Load())
         return transformed_node
 
 
@@ -57,8 +58,9 @@ def show_subexpressions(subexpressions: SubExpressionTable) -> None:
 
 
 def apply_cse(expr: ast.AST) -> ast.AST:
-    expr = apply_inline_named_expr(expr)
+    expr = apply_inline_all_named_expr(expr)
     cse_pre_analyzer = CSEPreAnalyzer()
     cse_pre_analyzer.visit(expr)
     cse = CommonSubexpressionElimination(cse_pre_analyzer.subexpressions)
-    return cse.visit(expr)
+    expr = cse.visit(expr)
+    return apply_remove_unused_named_expr(expr)
