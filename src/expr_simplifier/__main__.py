@@ -5,7 +5,7 @@ import ast
 from collections.abc import Callable
 
 from expr_simplifier import __version__
-from expr_simplifier.transforms import apply_constant_folding, apply_cse
+from expr_simplifier.transforms import apply_constant_folding, apply_cse, apply_logical_simplification
 from expr_simplifier.typing import Pass
 from expr_simplifier.utils import loop_until_stable
 
@@ -39,7 +39,10 @@ def main() -> None:
 
     create_pass_parser("cse", [apply_cse], "Common Subexpression Elimination", sub_parsers)
     create_pass_parser("constant_folding", [apply_constant_folding], "Constant Folding", sub_parsers)
-    create_pass_parser("auto", [apply_constant_folding, apply_cse], "Auto Simplification", sub_parsers)
+    create_pass_parser("logical_simplification", [apply_logical_simplification], "Logical Simplification", sub_parsers)
+    create_pass_parser(
+        "auto", [apply_constant_folding, apply_logical_simplification, apply_cse], "Auto Simplification", sub_parsers
+    )
 
     args = parser.parse_args()
     args.func(args)

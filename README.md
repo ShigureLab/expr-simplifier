@@ -13,22 +13,27 @@
    <a href="https://gitmoji.dev"><img alt="Gitmoji" src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67?style=flat-square"></a>
 </p>
 
-## Installation
+## Usage
+
+### Quick start in CLI
+
+We recommend using the tool `uv` to run the without manually installing the package:
+
+```console
+$ uvx expr_simplifier cse "a * 4 + (a * 4)"
+(___t_0 := (a * 4)) + ___t_0
+$ uvx expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=1
+(___x := 2) + ___x
+$ uvx expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
+4
+# uvx expr_simplifier logical_simplification "a and b and a"
+a and b
+```
+
+### As a library
 
 TODO...
 
-## Usage
-
-```console
-$ expr_simplifier cse "a * 4 + (a * 4)"
-(___t_0 := (a * 4)) + ___t_0
-$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=1
-(___x := 2) + ___x
-$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
-4
-```
-
 ## TODOs
 
--  [ ] Fold same logic operations (`a and b and a` -> `a and b`)
 -  [ ] Add runtime checks in uts
