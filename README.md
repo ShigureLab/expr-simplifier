@@ -22,8 +22,13 @@ TODO...
 ```console
 $ expr_simplifier cse "a * 4 + (a * 4)"
 (___t_0 := (a * 4)) + ___t_0
-$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
+$ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=1
 (___x := 2) + ___x
 $ expr_simplifier constant_folding "(___x := 1 + 1) + ___x" --max-iter=2
 4
 ```
+
+## TODOs
+
+-  [ ] Fold same logic operations (`a and b and a` -> `a and b`)
+-  [ ] Add runtime checks in uts
