@@ -19,6 +19,7 @@ from expr_simplifier.utils import loop_until_stable
         ("(1 > 2) * a", "False * a"),
         ("""f'Hello {"World"}!'""", "'Hello World!'"),
         ("(___x := 1) + 2 + ___x", "4"),
+        ("a == 1", "a == 1"),
     ],
 )
 def test_constant_folding(expr: str, expected: str):

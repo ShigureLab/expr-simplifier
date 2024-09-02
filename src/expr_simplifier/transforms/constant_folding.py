@@ -22,7 +22,9 @@ class ConstantFolding(ast.NodeTransformer):
             return fold_to_constant(node)
         if isinstance(node, ast.BoolOp) and all(isinstance(value, ast.Constant) for value in node.values):
             return fold_to_constant(node)
-        if isinstance(node, ast.Compare) and all(isinstance(comp, ast.Constant) for comp in node.comparators):
+        if isinstance(node, ast.Compare) and all(
+            isinstance(comp, ast.Constant) for comp in [node.left, *node.comparators]
+        ):
             return fold_to_constant(node)
         if isinstance(node, ast.JoinedStr) and all(
             isinstance(value, ast.Constant)
