@@ -52,4 +52,4 @@ print(ast.unparse(simplified_tree))
 
 ## TODOs
 
--  [ ] Add runtime checks in uts
+-  [ ] Automatically generate test cases
