@@ -6,6 +6,8 @@ import pytest
 
 from expr_simplifier.transforms import apply_cse
 
+from .utils import check_expr_at_runtime
+
 
 @pytest.mark.parametrize(
     ["expr", "expected"],
@@ -36,3 +38,4 @@ def test_cse(expr: str, expected: str):
     transformed_tree = apply_cse(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)

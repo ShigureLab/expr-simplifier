@@ -10,6 +10,8 @@ from expr_simplifier.transforms import (
     apply_remove_same_subexpression_in_logical_op,
 )
 
+from .utils import check_expr_at_runtime
+
 
 @pytest.mark.parametrize(
     ["expr", "expected"],
@@ -35,6 +37,7 @@ def test_logical_short_circuiting(expr: str, expected: str):
     transformed_tree = apply_logical_short_circuiting(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)
 
 
 @pytest.mark.parametrize(
@@ -60,6 +63,7 @@ def test_remove_same_subexpression_in_logical_op(expr: str, expected: str):
     transformed_tree = apply_remove_same_subexpression_in_logical_op(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)
 
 
 @pytest.mark.parametrize(
@@ -74,3 +78,4 @@ def test_logical_simplification(expr: str, expected: str):
     transformed_tree = apply_logical_simplification(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)

@@ -6,6 +6,8 @@ import pytest
 
 from expr_simplifier.transforms import apply_remove_unused_named_expr
 
+from .utils import check_expr_at_runtime
+
 
 @pytest.mark.parametrize(
     ["expr", "expected"],
@@ -20,3 +22,4 @@ def test_inline_named_expr(expr: str, expected: str):
     transformed_tree = apply_remove_unused_named_expr(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)
