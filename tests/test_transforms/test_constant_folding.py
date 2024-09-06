@@ -7,6 +7,8 @@ import pytest
 from expr_simplifier.transforms import apply_constant_folding
 from expr_simplifier.utils import loop_until_stable
 
+from .utils import check_expr_at_runtime
+
 
 @pytest.mark.parametrize(
     ["expr", "expected"],
@@ -27,6 +29,7 @@ def test_constant_folding(expr: str, expected: str):
     transformed_tree = apply_constant_folding(tree)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)
 
 
 @pytest.mark.parametrize(
@@ -41,3 +44,4 @@ def test_constant_folding_loop_until_stable(expr: str, expected: str, max_iter: 
     transformed_tree = loop_until_stable(tree, [apply_constant_folding], max_iter)
     transformed_expr = ast.unparse(transformed_tree)
     assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)

@@ -1,0 +1,3 @@
+from __future__ import annotations
+
+from expr_simplifier.analyzer.extern_symbol_analyzer import analyze_external_symbols as analyze_external_symbols
