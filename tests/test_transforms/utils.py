@@ -59,7 +59,6 @@ class AnyObject:
     def __rshift__(self, other: Any):
         other = AnyObject.to_any_object(other)
         return AnyObject(f"{self.name} >> {other.name}")
-    
 
     def __or__(self, other: Any):
         other = AnyObject.to_any_object(other)
