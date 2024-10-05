@@ -20,6 +20,14 @@ class AnyObject:
         other = AnyObject.to_any_object(other)
         return AnyObject(f"{other.name} + {self.name}")
 
+    def __sub__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} - {other.name}")
+
+    def __rsub__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{other.name} - {self.name}")
+
     def __mul__(self, other: Any):
         other = AnyObject.to_any_object(other)
         return AnyObject(f"{self.name} * {other.name}")
@@ -43,6 +51,35 @@ class AnyObject:
     def __rfloordiv__(self, other: Any):
         other = AnyObject.to_any_object(other)
         return AnyObject(f"{other.name} // {self.name}")
+
+    def __lshift__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} << {other.name}")
+
+    def __rshift__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} >> {other.name}")
+    
+
+    def __or__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} | {other.name}")
+
+    def __xor__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{other.name} | {self.name}")
+
+    def __pow__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} ** {other.name}")
+
+    def __mod__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} % {other.name}")
+
+    def __and__(self, other: Any):
+        other = AnyObject.to_any_object(other)
+        return AnyObject(f"{self.name} & {other.name}")
 
     def __getattr__(self, name: str):
         return AnyObject(f"{self.name}.{name}")
