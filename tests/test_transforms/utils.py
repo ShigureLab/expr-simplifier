@@ -117,6 +117,15 @@ class AnyObject:
     def __repr__(self):
         return f"AnyObject({self.name})"
 
+    def __neg__(self):
+        return AnyObject(f"-{self.name}")
+
+    def __pos__(self):
+        return AnyObject(f"+{self.name}")
+
+    def __invert__(self):
+        return AnyObject(f"~{self.name}")
+
     @staticmethod
     def to_any_object(value: Any):
         if isinstance(value, AnyObject):

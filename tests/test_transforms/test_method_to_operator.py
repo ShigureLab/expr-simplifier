@@ -44,12 +44,28 @@ def test_method_to_operator(expr: str, expected: str):
 @pytest.mark.parametrize(
     ["expr", "expected"],
     [
+        ("a.__neg__()", "-a"),
+        ("a.__pos__()", "+a"),
+        ("a.__invert__()", "~a"),
+    ],
+)
+def test_method_to_unary_operator(expr: str, expected: str):
+    tree = ast.parse(expr, mode="eval")
+    transformed_tree = apply_method_to_operator(tree)
+    transformed_expr = ast.unparse(transformed_tree)
+    assert transformed_expr == expected
+    check_expr_at_runtime(tree, transformed_tree)
+
+
+@pytest.mark.parametrize(
+    ["expr", "expected"],
+    [
         ("a.method(b)", "a.method(b)"),
         ("a.__unknown__(b)", "a.__unknown__(b)"),
         ("a.__add__", "a.__add__"),
     ],
 )
-def test_method_to_operator_no_change(expr: str, expected: str):
+def test_no_change(expr: str, expected: str):
     tree = ast.parse(expr, mode="eval")
     transformed_tree = apply_method_to_operator(tree)
     transformed_expr = ast.unparse(transformed_tree)
