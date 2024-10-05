@@ -66,7 +66,7 @@ class AnyObject:
 
     def __xor__(self, other: Any):
         other = AnyObject.to_any_object(other)
-        return AnyObject(f"{other.name} | {self.name}")
+        return AnyObject(f"{other.name} ^ {self.name}")
 
     def __pow__(self, other: Any):
         other = AnyObject.to_any_object(other)
