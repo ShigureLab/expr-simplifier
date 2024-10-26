@@ -30,13 +30,12 @@ Issues = "https://github.com/ShigureLab/expr-simplifier/issues"
 [project.scripts]
 expr_simplifier = "expr_simplifier.__main__:main"
 
-[tool.uv]
-dev-dependencies = [
-  "pytest>=8.3.2",
-  "tomli>=2.0.1",
-  "pyright>=1.1.374",
+[dependency-groups]
+dev = [
+  "pyright>=1.1.386",
+  "ruff>=0.7.1",
+  "pytest>=8.3.3",
   "pytest-rerunfailures>=14.0",
-  "ruff>=0.6.2",
 ]
 
 [tool.pyright]
