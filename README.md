@@ -52,4 +52,4 @@ print(ast.unparse(simplified_tree))
 
 ## TODOs
 
--  [ ] Automatically generate test cases
+- [ ] Automatically generate test cases
