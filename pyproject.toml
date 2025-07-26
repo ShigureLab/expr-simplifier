@@ -32,10 +32,10 @@ expr_simplifier = "expr_simplifier.__main__:main"
 
 [dependency-groups]
 dev = [
-  "pyright>=1.1.386",
-  "ruff>=0.7.1",
-  "pytest>=8.3.3",
-  "pytest-rerunfailures>=14.0",
+  "pyright>=1.1.403",
+  "ruff>=0.12.5",
+  "pytest>=8.4.1",
+  "pytest-rerunfailures>=15.1",
 ]
 
 [tool.pyright]
@@ -83,5 +83,5 @@ combine-as-imports = true
 python_files = ["tests/*.py", "tests/**/*.py"]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.8.3,<0.9.0"]
+build-backend = "uv_build"
