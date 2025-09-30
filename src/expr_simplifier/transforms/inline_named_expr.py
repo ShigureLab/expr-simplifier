@@ -3,8 +3,7 @@ from __future__ import annotations
 import ast
 import copy
 from collections.abc import Callable
-
-from typing_extensions import TypeAlias
+from typing import TypeAlias
 
 NamedExpressions: TypeAlias = dict[str, ast.expr]
 ShouldReplaceFn: TypeAlias = Callable[[str, NamedExpressions], bool]

@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import ast
-
-from typing_extensions import TypeAlias
+from typing import TypeAlias
 
 from expr_simplifier.transforms.inline_named_expr import apply_constant_propagation
 
