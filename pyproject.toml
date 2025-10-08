@@ -32,8 +32,8 @@ expr_simplifier = "expr_simplifier.__main__:main"
 
 [dependency-groups]
 dev = [
-  "pyright>=1.1.405",
-  "ruff>=0.13.2",
+  "pyright>=1.1.406",
+  "ruff>=0.14.0",
   "pytest>=8.4.2",
   "pytest-rerunfailures>=16.0.1",
 ]
@@ -83,5 +83,5 @@ combine-as-imports = true
 python_files = ["tests/*.py", "tests/**/*.py"]
 
 [build-system]
-requires = ["uv_build>=0.8.3,<0.9.0"]
+requires = ["uv_build>=0.9.0,<0.10.0"]
 build-backend = "uv_build"
