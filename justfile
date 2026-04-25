@@ -11,7 +11,7 @@ fmt:
   uv run ruff format .
 
 lint:
-  uv run pyright src/expr_simplifier tests
+  uv run ty check --error-on-warning src/expr_simplifier tests
   uv run ruff check .
 
 fmt-docs:
