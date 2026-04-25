@@ -3,11 +3,16 @@ from __future__ import annotations
 import argparse
 import ast
 from collections.abc import Callable
+from typing import Any, Protocol
 
 from expr_simplifier import __version__
 from expr_simplifier.transforms import apply_constant_folding, apply_cse, apply_logical_simplification
 from expr_simplifier.typing import Pass
 from expr_simplifier.utils import loop_until_stable
+
+
+class _SubparserFactory(Protocol):
+    def add_parser(self, name: str, /, **kwargs: Any) -> argparse.ArgumentParser: ...
 
 
 def create_pass_command(name: str, passes: list[Pass]) -> Callable[[argparse.Namespace], None]:
@@ -24,7 +29,7 @@ def create_pass_parser(
     name: str,
     passes: list[Pass],
     description: str,
-    subparser: argparse._SubParsersAction[argparse.ArgumentParser],  # pyright: ignore [reportPrivateUsage]
+    subparser: _SubparserFactory,
 ) -> None:
     parser = subparser.add_parser(name, help=description)
     parser.add_argument("input", help="The expression to simplify")
