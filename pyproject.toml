@@ -61,7 +61,7 @@ select = [
   "RUF100",
 ]
 ignore = [
-  "E501", # line too long, duplicate with ruff fmt
+  "E501", # line too long, duplicate with ruff format
 ]
 
 [tool.ruff.lint.isort]
