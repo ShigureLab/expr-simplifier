@@ -12,9 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        python-version: ['3.11', '3.12', '3.13', '3.14', '3.15', '3.15t']
         architecture: ['x64']
     name: unittest - Python ${{ matrix.python-version }} on ${{ matrix.architecture }}
+    env:
+      UV_PYTHON: ${{ matrix.python-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -37,6 +39,22 @@ jobs:
       - name: Install dependencies
         run: |
           just ci-install
+
+      - name: Verify test interpreter
+        run: |
+          uv run python - <<'PY'
+          import os
+          import sys
+          import sysconfig
+
+          expected = os.environ['UV_PYTHON']
+          assert sys.version_info[:2] == tuple(map(int, expected.rstrip('t').split('.'))), sys.version
+          free_threaded = expected.endswith('t')
+          assert bool(sysconfig.get_config_var('Py_GIL_DISABLED')) == free_threaded, sys.version
+          if free_threaded:
+              assert not sys._is_gil_enabled(), sys.version
+          print(sys.version)
+          PY
 
       - name: unit test
         run: |
