@@ -32,9 +32,9 @@ expr_simplifier = "expr_simplifier.__main__:main"
 
 [dependency-groups]
 dev = [
-  "ty>=0.0.89",
-  "ruff>=0.17.1",
-  "pytest>=9.1.1",
+  "ty>=0.0.95",
+  "ruff>=0.17.3",
+  "pytest>=9.2.0",
   "pytest-rerunfailures>=16.7",
 ]
 
